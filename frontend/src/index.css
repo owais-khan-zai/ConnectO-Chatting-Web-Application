@@ -1,0 +1,42 @@
+@import "tailwindcss";
+
+
+:root {
+  --bg-color: #fff;
+  --text-color: #000;
+  --blue-color: #0266FF;
+  --blue-shade: #e4edfb;
+  --light-shade: #f2f4f7;
+  --dark-shade: #414243;
+}
+
+.dark-mode {
+  --bg-color: #111;
+  --text-color: #eee;
+  --blue-color: #0266FF;
+}
+
+body{
+    background: var(--bg-color);
+    color: var(--text-color);
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.chatsContainer::-webkit-scrollbar{
+  display: none
+}
+
+
+.menuList {
+  overscroll-behavior: contain; 
+  scroll-behavior: smooth;
+}
+
+.menuList::-webkit-scrollbar {
+  display: none;
+}
