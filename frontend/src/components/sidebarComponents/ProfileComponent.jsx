@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import logo from '../../assets/webAssets/logo.png'
 import { useDispatch, useSelector } from 'react-redux'
 import { setActiveTab } from '../../slices/sidebarNavigation/SidebarNavigationSlice'
@@ -9,10 +9,15 @@ const ProfileComponent = () => {
     const backHandler = () =>{
        dispatch(setActiveTab(previousTab || "Chat"));
     }
+
+    const [UserName, setUserName] = useState("Website Logo")
+    const [UserAbout, setUserAbout] = useState("This is the testing text which the user write")
   return (
     <div className='w-full h-full bg-[var(--bg-color)] flex flex-col items-center ' >
         <div className='flex items-center gap-6 sm:gap-6 bg-[var(--light-shade)] text-[var(--dark-shade)] px-4 py-4 w-full'>
-            <i onClick={backHandler} className="ri-arrow-left-line text-[1.4rem] sm:text-[1.6rem] font-semibold cursor-pointer"></i>
+            <div className='bg-[var(--blue-color)] p-[4.5px] px-[8px] rounded-full' onClick={backHandler}>
+                <i className="ri-arrow-left-line text-[1rem] sm:text-[1.6rem] font-semibold cursor-pointer text-white"></i>
+            </div>
             <h5 className='text-[1.6rem] sm:text-[1.9rem] font-semibold'>Profile</h5>
         </div>
         <div className='rounded-full w-[11.3rem] sm:w-[14.2rem] mt-[2.5rem] sm:mt-5 relative '>
@@ -29,7 +34,7 @@ const ProfileComponent = () => {
                     <div className='flex justify-between w-full items-center'>
                         <div className='flex flex-col px-[0.8rem] sm:px-5 gap-[0.35rem] sm:gap-1'>
                             <label className='italic font-semibold text-[1rem] sm:text-[1.15rem] leading-none'>Name</label>
-                            <input type='text' value="Website Logo" className='text-[0.9rem] sm:text-[1.1rem] leading-none outline-none'/>
+                            <input type='text' value={UserName} onChange={(e)=>setUserName(e.target.value)} className='text-[0.9rem] sm:text-[1.1rem] leading-none outline-none'/>
                         </div>
                         <i className="ri-pencil-fill text-[1.65rem] sm:text-[1.8rem] cursor-pointer"></i>
                     </div>
@@ -39,7 +44,7 @@ const ProfileComponent = () => {
                     <div className='flex justify-between w-full  items-center'>
                         <div className='flex flex-col px-[0.8rem] sm:px-5 w-full gap-[0.35rem] sm:gap-1'>
                             <label className='italic font-semibold text-[1rem] sm:text-[1.15rem]  leading-none'>About</label>
-                            <input type='text' value="This is the testing text which the user write " className='whitespace-pre-wrap text-[0.9rem] sm:text-[1.1rem] leading-none outlin-none'/>
+                            <input type='text' value={UserAbout} onChange={(e)=>setUserAbout(e.target.value)} className='whitespace-pre-wrap text-[0.9rem] sm:text-[1.1rem] leading-none outlin-none'/>
                         </div>
                             <i className="ri-pencil-fill text-[1.65rem] sm:text-[1.8rem] cursor-pointer"></i>
                         </div>
@@ -48,7 +53,7 @@ const ProfileComponent = () => {
                     <i className="ri-mail-fill"></i>
                     <div className='flex flex-col  px-[0.8rem] sm:px-5 gap-[0.35rem] sm:gap-1'>
                         <label className='italic font-semibold text-[1rem] sm:text-[1.15rem] leading-none'>Email</label>
-                        <input type='Email' readonly value="khanowaiszai@gmail.com" className='whitespace-pre-wrap select-none cursor-default text-[0.9rem] sm:text-[1.1rem] leading-none outline-none'/>
+                        <input type='Email' readOnly value="khanowaiszai@gmail.com" className='whitespace-pre-wrap select-none cursor-default text-[0.9rem] sm:text-[1.1rem] leading-none outline-none'/>
                     </div>
                 </div>
             </form>

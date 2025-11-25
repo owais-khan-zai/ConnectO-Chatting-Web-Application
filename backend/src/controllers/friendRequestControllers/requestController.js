@@ -117,7 +117,7 @@ export const friendRequestAccept = async (req, res) =>{
         }
 
         const decode = jwt.verify(token, process.env.JWT_SECRET)
-        const user = await userModel.findById(decode.id)
+        const user = await userModel.findById(decode.id).select("+friends +friendRequestSend +friendRequestReceive")
 
         if(!user){
             return responseHandler(res, 400, false, "Invalid token")
@@ -129,7 +129,7 @@ export const friendRequestAccept = async (req, res) =>{
             return responseHandler(res, 400, false, "Receiver ID is required")
         }
 
-        const senderUser = await userModel.findById(senderId)
+        const senderUser = await userModel.findById(senderId).select("+friends +friendRequestSend +friendRequestReceive")
         
 
         if(!senderUser){
@@ -158,36 +158,36 @@ export const friendRequestAccept = async (req, res) =>{
 
 export const friendRequestReject = async (req, res) => {
     try {
-         const token = req.cookies.token
+        const token = req.cookies.token
 
         if(!token){
             return responseHandler(res, 400, false, "Login your account first")
         }
 
         const decode = jwt.verify(token, process.env.JWT_SECRET)
-        const user = await userModel.findById(decode.id)
-
+        const user = await userModel.findById(decode.id).select("+friends +friendRequestSend +friendRequestReceive")
+        console.log("user", user)
         if(!user){
             return responseHandler(res, 400, false, "Invalid token")
         }
 
-        const {senderId} = req.body
+        const {requestReceiverId} = req.body
 
-        if(!senderId){
+        if(!requestReceiverId){
             return responseHandler(res, 400, false, "Receiver ID is required")
         }
 
-        const senderUser = await userModel.findById(senderId)
+        const receiverUser = await userModel.findById(requestReceiverId).select("+friends +friendRequestSend +friendRequestReceive")
 
-        if(!senderUser){
+        if(!receiverUser){
             return responseHandler(res, 400, false, "Invalid ID request")
         }
 
-        user.friendRequestReceive = user.friendRequestReceive.filter((id) => id.toString() !== senderId)
-        senderUser.friendRequestSend = senderUser.friendRequestSend.filter((id) => id.toString() !== user._id)
+        user.friendRequestSend = user.friendRequestSend.filter((id) => id.toString() !== senderId)
+        receiverUser.friendRequestReceive = receiverUser.friendRequestReceive.filter((id) => id.toString() !== user._id)
 
         await user.save()
-        await senderUser.save()
+        await receiverUser.save()
 
         return responseHandler(res, 200, true, "Friend request rejected")
     } catch (error) {

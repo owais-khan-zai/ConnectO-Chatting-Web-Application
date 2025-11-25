@@ -3,6 +3,7 @@ import ProfileComponent from '../../components/sidebarComponents/ProfileComponen
 import SettingComponent from '../../components/sidebarComponents/SettingComponent';
 import MemberComponent from '../../components/sidebarComponents/MemberComponent';
 import ChatsComponent from '../../components/sidebarComponents/ChatsComponent';
+import FriendRequestComponent from '../../components/sidebarComponents/FriendRequestComponent';
 import logo from "../../assets/webAssets/logo.png";
 import { MdMarkUnreadChatAlt } from "react-icons/md";
 import gsap from 'gsap';
@@ -43,8 +44,7 @@ const SideBar = () => {
     };
 
     const menuTabsHandler = (e) =>{
-        const ele = e.currentTarget.innerText;
-        console.log(ele)
+        const ele = e.currentTarget.innerText.trim();
         if (ele) {
             dispatch(setActiveTab(ele));
         }
@@ -110,6 +110,10 @@ const SideBar = () => {
         {/* member page */}
         <div className={`w-full h-full absolute top-0 z-4 ${activeTab === "Member" ? " " : "hidden"}`}>
             <MemberComponent/>
+        </div>
+
+        <div className={`w-full h-full absolute top-0 z-4 ${activeTab === "Friend Request" ? " " : "hidden"}`}>
+            <FriendRequestComponent/>
         </div>
 
         {hideLayout && <div className=' bg-[var(--bg-color)] w-full  h-[4.4rem]  sm:h-[100px] shadow-[0_-4px_10px_rgba(0,0,0,0.04)] z-10 fixed bottom-0 left-0 '>

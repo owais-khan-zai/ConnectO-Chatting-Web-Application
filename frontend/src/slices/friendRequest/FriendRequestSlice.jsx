@@ -73,13 +73,13 @@ const friendRequestSlice = createSlice({
 
         thunks.forEach((thunks)=>{
             builder.addCase(thunks.pending, (state)=>{
-            state.loading = true
-            state.error = false
+            state.loading = true;
+            state.error = false;
             state.response = null
             })
             builder.addCase(thunks.fulfilled, ( state, action) => {
-                state.loading = false, 
-                state.response = action.payload
+                state.loading = false;
+                state.response = action.payload;
                 state.error = false
             })
             builder.addCase(thunks.rejected, (state, action) => {

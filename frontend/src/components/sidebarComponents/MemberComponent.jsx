@@ -83,11 +83,11 @@ const MemberComponent = () => {
 
         <div className={`fixed top-0 left-0 w-full h-full ${isPopUpOpen ? "block" : "hidden"} z-10 bg-black/30`}>
             <div className='absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] p-6 bg-[var(--bg-color)] text-[var(--text-color)] w-[85%] max-w-[320px] rounded-md'>
-                <h4 className='text-[1.3rem] sm:text-[1.5rem] font-semibold'>Conformation</h4>
+                <h4 className='text-[1.3rem] sm:text-[1.5rem] font-semibold'>Confirmation</h4>
                 <p className='text-[var(--dark-shade)] text-[0.95rem] sm:text-[1rem] mt-1'>Are you sure to withdraw this request?</p>
                 <div className='flex justify-between w-full  pt-4'>
-                    <button onClick={()=>cancelPendingBtn()} className='border-2 rounded-full w-[48%] sm:text-[1.1rem] text-[var(--dark-shade)] py-2 font-semibold cursor-pointer'>Cancel</button>
-                    <button onClick={() => withdrawPendingBtn()} className='bg-[var(--blue-color)] text-white w-[48%] sm:text-[1.1rem]  py-2 rounded-full font-semibold cursor-pointer'>Withdraw</button>
+                    <button onClick={()=>cancelPendingBtn()} className='border-2 rounded-full w-[49%] sm:text-[1.1rem] text-[var(--dark-shade)] py-2 font-semibold cursor-pointer'>Cancel</button>
+                    <button onClick={() => withdrawPendingBtn()} className='bg-[var(--blue-color)] text-white w-[49%] sm:text-[1.1rem]  py-2 rounded-full font-semibold cursor-pointer'>Withdraw</button>
                 </div>
             </div>
         </div>

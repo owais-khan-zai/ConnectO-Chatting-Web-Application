@@ -56,7 +56,9 @@ const SettingPage = () => {
   return (
     <div className='w-full h-full bg-[var(--bg-color)] flex flex-col items-center '>
         <div className='flex items-center gap-5 sm:gap-6 bg-[var(--light-shade)] text-[var(--dark-shade)] px-4 py-4 w-full'>
-            <i onClick={backHandler} className="ri-arrow-left-line text-[1.4rem] sm:text-[1.6rem] font-semibold cursor-pointer"></i>
+            <div className='bg-[var(--blue-color)] p-[4.5px] px-[8px] rounded-full' onClick={backHandler}>
+                <i className="ri-arrow-left-line text-[1rem] sm:text-[1.6rem] font-semibold cursor-pointer text-white"></i>
+            </div>
             <h5 className='text-[1.6rem] sm:text-[1.8rem] font-semibold'>Setting</h5>
         </div>
 
@@ -70,7 +72,7 @@ const SettingPage = () => {
         
         <div className='flex flex-col w-full px-[20px] mt-[8px] sm:mt-[0px] pb-[70px] sm:pb-[50px]'>
           {settingsOptions.map((item, index)=>{
-              return <div className='flex mt-[18px] sm:mt-[19px] items-center justify-between  w-full '>
+              return <div key={index} className='flex mt-[18px] sm:mt-[19px] items-center justify-between  w-full '>
                       <div className='flex items-center gap-[10px] sm:gap-4 cursor-pointer'>
                         <i className={`${item.icon} text-[29px] sm:text-[31px] text-[var(--blue-color)]`}></i>
                         <div className='flex flex-col   '>

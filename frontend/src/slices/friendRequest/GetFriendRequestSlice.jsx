@@ -28,9 +28,12 @@ export const getFriendRequestSendThunk = createAsyncThunk( 'get/friend-request/s
 
 
 const initialState = {
-    response: null,
-    loading: false,
-    error: false
+    responseReceiveRequest: null,
+    responseSendRequest: null,
+    sendRequestloading: false,
+    receiveRequestLoading: false,
+    sendRequesterror: false,
+    receiveRequestError: false
 }
 
 const getFriendRequestSlice = createSlice({
@@ -38,34 +41,41 @@ const getFriendRequestSlice = createSlice({
     initialState,
     reducers: {
         resetGetFriendRequestState: (state) => {
-            state.response = null;
-            state.error = null;
-            state.loading = false;
+            state.responseReceiveRequest = null;
+            state.receiveRequestError = null;
+            state.receiveRequestLoading = false;
+
+            state.responseSendRequest = null;
+            state.sendRequestError = null;
+            state.sendRequestloading = false;
         }
     },
     extraReducers: (builder) => {
-        const thunks = [
-            getFriendRequestReceiveThunk,
-            getFriendRequestSendThunk,
-        ]
+        builder
+          .addCase(getFriendRequestReceiveThunk.pending, (state)=>{
+              state.receiveRequestLoading = true;
+          })
+          .addCase(getFriendRequestReceiveThunk.fulfilled, (state, action)=>{
+              state.receiveRequestLoading = false;
+              state.responseReceiveRequest = action.payload;
+          })
+          .addCase(getFriendRequestReceiveThunk.rejected, (state, action)=>{
+              state.receiveRequestLoading = false;
+              state.receiveRequestError = action.payload;
+          })
 
-        thunks.forEach((thunks)=>{
-            builder.addCase(thunks.pending, (state)=>{
-                state.loading = true
-                state.error = false
-                state.response = null
+        builder
+            .addCase(getFriendRequestSendThunk.pending, (state)=>{
+                state.sendRequestloading = true;
             })
-            builder.addCase(thunks.fulfilled, ( state, action) => {
-                state.loading = false, 
-                state.response = action.payload
-                state.error = false
+            .addCase(getFriendRequestSendThunk.fulfilled, (state, action)=>{
+                state.sendRequestloading = false;
+                state.responseSendRequest = action.payload;
             })
-            builder.addCase(thunks.rejected, (state, action) => {
-                state.loading = false;
-                state.response = null;
-                state.error = action.payload || "Something went wrong!";
-            });
-        })
+            .addCase(getFriendRequestSendThunk.rejected, (state, action)=>{
+                state.sendRequestloading = false;
+                state.sendRequestError = action.payload;
+            })
     }
 })
 
