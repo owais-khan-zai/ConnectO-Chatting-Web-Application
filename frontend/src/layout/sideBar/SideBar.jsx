@@ -57,7 +57,7 @@ const SideBar = () => {
         {hideLayout && <div className='  fixed w-full top-0 z-100'>
             <div className="w-full flex justify-between items-center p-3  bg-[var(--bg-color)]">
             <div className="flex items-center justify-center gap-2">
-            <img src={logo} alt="Logo" className="w-[2.7rem] sm:w-[3.2rem]" />
+            <img src={logo} alt="Logo" className="w-[2.7rem] sm:w-[3.4rem]" />
             <h5 className="text-[var(--blue-color)] text-[1.8rem] sm:text-[2.2rem] font-semibold">
                 ConnectO
             </h5>
@@ -116,7 +116,7 @@ const SideBar = () => {
             <FriendRequestComponent/>
         </div>
 
-        {hideLayout && <div className=' bg-[var(--bg-color)] w-full  h-[4.4rem]  sm:h-[100px] shadow-[0_-4px_10px_rgba(0,0,0,0.04)] z-10 fixed bottom-0 left-0 '>
+        {hideLayout && <div className=' bg-[var(--bg-color)] w-full  h-[4.8rem]  sm:h-[92px] shadow-[0_-4px_10px_rgba(0,0,0,0.04)] z-10 fixed bottom-0 left-0 '>
             <ul className='flex justify-between items-center w-[70%] max-w-[350px] mx-auto  text-[1.3rem] sm:text-[23px] transition-all duration-200 text-[var(--blue-color)] py-[0.5rem] sm:py-[10px]'>
                 <li onClick={(e) => ActiveTabHandler(e)} className='flex flex-col items-center gap-1'><i className={`ri-chat-ai-line cursor-pointer transition-all duration-200 ${ activeTab == "Chat" ? " p-[0.5rem] px-[0.8rem] sm:p-[8px] sm:px-[14px] bg-[var(--blue-shade)]" : "text-[1.7rem] sm:text-[32px] bg-white"} rounded-full`}></i> <h6 className={`font-semibold text-[0.85rem] sm:text-[16px] leading-none transition-all duration-200 ${activeTab != "Chat" && "hidden"}`}>Chat</h6></li>
                 <li onClick={(e) => ActiveTabHandler(e)} className='flex flex-col items-center gap-1'><i className={`ri-dvd-ai-line cursor-pointer transition-all duration-200  ${ activeTab == "Status" ? "p-[0.5rem] px-[0.8rem] sm:p-[8px] sm:px-[14px] bg-[var(--blue-shade)]" : "text-[1.7rem] sm:text-[32px] bg-white"} rounded-full`}></i> <h6 className={`font-semibold text-[0.85rem] sm:text-[16px] leading-none transition-all duration-200 ${activeTab != "Status" && "hidden"}`}>Status</h6></li>

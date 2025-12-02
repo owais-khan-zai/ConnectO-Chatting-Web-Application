@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useReducer, useRef, useState } from 'react'
 import { toast } from "react-toastify";
 import logo from '../../assets/webAssets/logo.png'
 import {useFormik} from "formik";
@@ -54,6 +54,35 @@ const SignUp = () => {
   }, [response, error]);
 
 
+    const [isPasswordVisibleFirst, setIsPasswordVisibleFirst] = useState(false);
+    const [isPasswordVisibleSecond, setIsPasswordVisibleSecond] = useState(false)
+    const passwordInputRefFirst = useRef(null);
+    const passwordInputRefSecond = useRef(null);
+    const showPasswordFirst = (e) => {
+      if(isPasswordVisibleFirst){
+        e.currentTarget.classList.remove("ri-eye-off-line")
+        e.currentTarget.classList.add("ri-eye-line")
+        setIsPasswordVisibleFirst(false)
+      }
+      else{
+        e.currentTarget.classList.remove("ri-eye-line")
+        e.currentTarget.classList.add("ri-eye-off-line")
+        setIsPasswordVisibleFirst(true)
+      }
+    }
+
+    const showPasswordSecond = (e) => {
+      if(isPasswordVisibleSecond){
+        e.currentTarget.classList.remove("ri-eye-off-line")
+        e.currentTarget.classList.add("ri-eye-line")
+        setIsPasswordVisibleSecond(false)
+      }
+      else{
+        e.currentTarget.classList.remove("ri-eye-line")
+        e.currentTarget.classList.add("ri-eye-off-line")
+        setIsPasswordVisibleSecond(true)
+      }
+    }
 
   return (
     <div className='flex items-center sm:justify-center flex-col lg:flex-row  w-full max-w-[1700px] mx-auto  min-h-screen  py-12 sm:py-0 lg:my-0 '>
@@ -161,14 +190,20 @@ const SignUp = () => {
             </div>
 
             <div className='w-full'>
-              <input type='password' name='password' placeholder='Enter Password'  value={formik.values.password} onChange={formik.handleChange} onBlur={formik.handleBlur}   className='border-1 border-blue-500 text-[0.9rem] sm:text-[1.05rem] py-3 p-3 w-full outline-none rounded-md'/>
+              <div className='relative'>
+                <input  ref={passwordInputRefFirst} type={isPasswordVisibleFirst ? "text" : "password"} name='password' placeholder='Enter Password'  value={formik.values.password} onChange={formik.handleChange} onBlur={formik.handleBlur}   className='border-1 border-blue-500 text-[0.9rem] sm:text-[1.05rem] py-3 p-3 w-full outline-none rounded-md'/>
+                <i onClick={(e)=> {showPasswordFirst(e)}} className="ri-eye-line absolute top-[50%] right-[12px] text-xl lg:text-[1.4rem] translate-y-[-50%] text-gray-500 cursor-pointer"></i>
+              </div>
               {formik.touched.password && formik.errors.password && (
                     <p className='text-red-500 text-[0.85rem] sm:text-[0.95rem] mt-1'>{formik.errors.password}</p>
                 )}
             </div>
 
             <div className='w-full'>
-              <input type='password' name='confirmPassword' placeholder='Confirm Password'  value={formik.values.confirmPassword} onChange={formik.handleChange} onBlur={formik.handleBlur}   className='border-1 border-[var(--blue-color)]  text-[0.9rem] sm:text-[1.05rem] py-3 p-3  w-full outline-none rounded-md'/>
+              <div className='relative'>
+                <input ref={passwordInputRefSecond} type={isPasswordVisibleSecond ? "text" : "password"} name='confirmPassword' placeholder='Confirm Password'  value={formik.values.confirmPassword} onChange={formik.handleChange} onBlur={formik.handleBlur}   className='border-1 border-[var(--blue-color)]  text-[0.9rem] sm:text-[1.05rem] py-3 p-3  w-full outline-none rounded-md'/>
+                <i onClick={(e)=> {showPasswordSecond(e)}} className="ri-eye-line absolute top-[50%] right-[12px] text-xl lg:text-[1.4rem] translate-y-[-50%] text-gray-500 cursor-pointer"></i>
+              </div>
               {formik.touched.confirmPassword && formik.errors.confirmPassword && (
                     <p className='text-red-500 text-[0.85rem] sm:text-[0.95rem] mt-1'>{formik.errors.confirmPassword}</p>
                 )}

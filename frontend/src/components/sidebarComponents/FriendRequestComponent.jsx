@@ -95,7 +95,7 @@ const FriendRequestComponent = () => {
                  <div className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] p-6 bg-[var(--bg-color)] text-[var(--text-color)] w-[85%] max-w-[320px] rounded-md">
                     <h4 className='text-[1.3rem] sm:text-[1.5rem] font-semibold'>Confirmation</h4>
                     <p className='text-[var(--dark-shade)] text-[0.95rem] sm:text-[1rem] mt-1'>Are you sure to cancel this {activeState === "Send" && "pending" } request?</p>
-                    <div className='flex justify-between w-full pt-4'>
+                    <div className='flex justify-between w-full pt-6'>
                         <button onClick={() => cancelPendingBtn()} className='border-2 rounded-full w-[49%] sm:text-[1.1rem] text-[var(--dark-shade)] py-2 font-semibold cursor-pointer'>Cancel</button>
                         <button onClick={() => cancelConfirmBtn()} className='bg-[var(--blue-color)] text-white w-[49%] sm:text-[1.1rem]  py-2 rounded-full font-semibold cursor-pointer'>Sure</button>
                     </div>
@@ -105,19 +105,19 @@ const FriendRequestComponent = () => {
 
       <div className="flex items-center gap-6 sm:gap-6 bg-[var(--light-shade)] text-[var(--dark-shade)] px-4 py-4 w-full">
         <div
-          className="bg-[var(--blue-color)] p-[4.5px] px-[8px] rounded-full"
+          className="bg-[var(--blue-color)] p-[4.5px] px-[8px] sm:px-[10px] rounded-full"
           onClick={backHandler}
         >
-          <i className="ri-arrow-left-line text-[1rem] sm:text-[1.6rem] font-semibold cursor-pointer text-white"></i>
+          <i className="ri-arrow-left-line text-[1rem] sm:text-[1.3rem] font-semibold cursor-pointer text-white"></i>
         </div>
-        <h5 className="text-[1.6rem] sm:text-[1.9rem] font-semibold">
+        <h5 className="text-[1.6rem] sm:text-[1.85rem] font-semibold">
           Friend Request
         </h5>
       </div>
       <div className="w-full flex justify-between items-center ">
         <div
             onClick={()=>setActiveState("Receive")}
-            className={`w-[50%] text-center border-b-3 font-semibold text-[17px]  py-[12px] cursor-pointer ${
+            className={`w-[50%] text-center border-b-3 font-semibold text-[17px] sm:text-[19px]  py-[12px]  cursor-pointer ${
                 activeState == "Receive"
                 ? "border-[var(--blue-color)]"
                 : "border-transparent"
@@ -127,7 +127,7 @@ const FriendRequestComponent = () => {
         </div>
         <div
             onClick={()=>setActiveState("Pending")}
-            className={`w-[50%] text-center border-b-3 font-semibold  text-[17px]  py-[12px] cursor-pointer ${
+            className={`w-[50%] text-center border-b-3 font-semibold  text-[17px] sm:text-[19px] py-[12px]  cursor-pointer ${
                 activeState == "Pending"
                 ? "border-[var(--blue-color)]"
                 : " border-transparent"
@@ -173,8 +173,8 @@ const FriendRequestComponent = () => {
               ))
             ) : (
                <div className="w-full h-[90%] text-gray-500 text-[1.1rem] flex flex-col justify-center items-center">
-                <i className="ri-user-search-line text-[1.8rem]"></i>
-                <p>
+                <i className="ri-user-search-line text-[1.8rem] sm:text-[2.1rem]"></i>
+                <p className="sm:text-[1.3rem]">
                     No request yet
                 </p>
               </div>
@@ -209,8 +209,8 @@ const FriendRequestComponent = () => {
               ))
             ) : (
               <div className="w-full h-[90%] text-gray-500 text-[1.1rem] flex flex-col justify-center items-center">
-                <i className="ri-user-search-line text-[1.8rem]"></i>
-                <p>
+                <i className="ri-user-search-line text-[1.8rem] sm:text-[2.1rem]"></i>
+                <p className="text-[1.3rem]">
                     No pending requests yet
                 </p>
               </div>

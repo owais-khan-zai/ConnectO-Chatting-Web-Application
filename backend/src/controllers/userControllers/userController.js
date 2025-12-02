@@ -48,3 +48,27 @@ export const getUser = async (req, res) => {
     }
 }
 
+export const loggedInUserData = async (req, res) =>{
+    try{
+        const token = req.cookies.token;
+        if(!token){
+            return responseHandler(res, 400, false, "Login your account first")
+        }
+        const decoded = jwt.verify(token, process.env.JWT_SECRET)
+
+        if(!decoded){
+            return responseHandler(res, 400, false, "Invalid token! Login again")
+        }
+        const loggedInUser = await userModel.findById(decoded.id);
+        if(!loggedInUser){
+            return responseHandler(res, 404, false, "Login your account first")
+        }
+        const sendingData = userDataFilterFunction(loggedInUser);
+        return responseHandler(res, 200, true, "User data fetched successfully", sendingData)
+    }
+    catch(err){
+        console.log("Error : ", err)
+        return responseErrorHandler(res)
+    }
+}
+

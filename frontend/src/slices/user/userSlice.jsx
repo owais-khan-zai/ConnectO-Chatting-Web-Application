@@ -15,6 +15,17 @@ export const getUserThunk = createAsyncThunk( 'get/users', async (_, { rejectWit
   }
 );
 
+export const loggedInUserThunk = createAsyncThunk( 'get/logged-in-user', async (_, { rejectWithValue }) => {
+    try {
+      const response = await userServices.loggedInUser();
+      return response;
+    } catch (error) {
+      const errMsg = error.response?.data?.message || error.message || "Something went wrong!";
+      return rejectWithValue(errMsg);
+    }
+  }
+);
+
 
 
 const initialState = {
@@ -35,21 +46,22 @@ const userSlice = createSlice({
     },
     extraReducers: (builder) => {
         const thunks = [
-            getUserThunk
+            getUserThunk,
+            loggedInUserThunk
         ]
 
-        thunks.forEach((thunks)=>{
-            builder.addCase(thunks.pending, (state)=>{
+        thunks.forEach((thunk)=>{
+            builder.addCase(thunk.pending, (state)=>{
             state.loading = true
             state.error = false
             state.response = null
             })
-            builder.addCase(thunks.fulfilled, ( state, action) => {
-                state.loading = false, 
+            builder.addCase(thunk.fulfilled, ( state, action) => {
+                state.loading = false
                 state.response = action.payload
                 state.error = false
             })
-            builder.addCase(thunks.rejected, (state, action) => {
+            builder.addCase(thunk.rejected, (state, action) => {
                 state.loading = false;
                 state.response = null;
                 state.error = action.payload || "Something went wrong!";

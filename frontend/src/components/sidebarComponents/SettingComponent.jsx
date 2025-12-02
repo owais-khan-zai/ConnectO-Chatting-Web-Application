@@ -56,10 +56,13 @@ const SettingPage = () => {
   return (
     <div className='w-full h-full bg-[var(--bg-color)] flex flex-col items-center '>
         <div className='flex items-center gap-5 sm:gap-6 bg-[var(--light-shade)] text-[var(--dark-shade)] px-4 py-4 w-full'>
-            <div className='bg-[var(--blue-color)] p-[4.5px] px-[8px] rounded-full' onClick={backHandler}>
-                <i className="ri-arrow-left-line text-[1rem] sm:text-[1.6rem] font-semibold cursor-pointer text-white"></i>
+            <div
+                className="bg-[var(--blue-color)] p-[4.5px] px-[8px] sm:px-[10px] rounded-full"
+                onClick={backHandler}
+                >
+                <i className="ri-arrow-left-line text-[1rem] sm:text-[1.3rem] font-semibold cursor-pointer text-white"></i>
             </div>
-            <h5 className='text-[1.6rem] sm:text-[1.8rem] font-semibold'>Setting</h5>
+            <h5 className='text-[1.6rem] sm:text-[1.85rem] font-semibold'>Setting</h5>
         </div>
 
         <div className='flex w-full px-4 py-[18px] pb-[7px] sm:py-[20px] sm:pb-[10px] items-center gap-[8px]'>

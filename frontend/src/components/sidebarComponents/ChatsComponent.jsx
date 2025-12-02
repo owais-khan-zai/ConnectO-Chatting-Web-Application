@@ -75,11 +75,11 @@ const ChatsComponent = () => {
       
 
       <div className="h-full overflow-y-scroll  chatsContainer">
-        <div className="w-[95%] md:w-[98%] relative p-[0.6rem] sm:py-[11px] px-3  border-1  border-gray-300 rounded-3xl flex justify-between mx-auto">
+        <div className="w-[95%] md:w-[98%] relative p-[0.6rem] sm:py-[10px] px-3  border-1  border-gray-300 rounded-3xl flex justify-between mx-auto">
           <input
             type="text"
             placeholder="Search"
-            className="w-full outline-none  text-[1rem] sm:text-[18px]"
+            className="w-full outline-none  text-[1rem] sm:text-[17px]"
           />
           <i className="ri-search-line  text-[1.05rem] sm:text-[18.5px] sm:pr-1  text-gray-500 pl-2 cursor-pointer"></i>
         </div>

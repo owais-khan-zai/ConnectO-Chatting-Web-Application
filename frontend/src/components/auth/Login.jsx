@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import logo from '../../assets/webAssets/logo.png'
 import { NavLink, useNavigate } from 'react-router-dom'
 import googleIcon from '../../assets/webAssets/googleIcon.png'
@@ -11,7 +11,7 @@ import { toast } from 'react-toastify';
 const Login = () => {
 
   const navigate = useNavigate();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const {loading, error, response} = useSelector((state) => state.auth)
 
@@ -76,6 +76,22 @@ const Login = () => {
         dispatch(resetAuthState());
       }
     }, [response, error]);
+
+  
+    const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+    const passwordInputRef = useRef(null);
+    const showPassword = (e) => {
+      if(isPasswordVisible){
+        e.currentTarget.classList.remove("ri-eye-off-line")
+        e.currentTarget.classList.add("ri-eye-line")
+        setIsPasswordVisible(false)
+      }
+      else{
+        e.currentTarget.classList.remove("ri-eye-line")
+        e.currentTarget.classList.add("ri-eye-off-line")
+        setIsPasswordVisible(true)
+      }
+    }
 
   return (
     <div className='flex items-center justify-center flex-row-reverse w-full max-w-[1700px] mx-auto min-h-screen  my-4 sm:my-6 lg:my-0'>
@@ -165,7 +181,10 @@ const Login = () => {
             </div>
 
             <div className='w-full'>
-              <input type='password' name='password' placeholder='Password' value={formData.password} onChange={(e)=>changeHandler(e)} className='border-1 border-blue-500 text-[0.9rem] sm:text-[1.05rem] py-3 p-3 w-full outline-none rounded-md'/>
+              <div className='relative'>
+                <input ref={passwordInputRef} type={isPasswordVisible ? "text" : "password"} name='password' placeholder='Password' value={formData.password} onChange={(e)=>changeHandler(e)} className='border-1 border-blue-500 text-[0.9rem] sm:text-[1.05rem] py-3 p-3 w-full outline-none rounded-md'/>
+                <i onClick={(e)=> {showPassword(e)}} className="ri-eye-line absolute top-[50%] right-[12px] text-xl lg:text-[1.4rem] translate-y-[-50%] text-gray-500 cursor-pointer"></i>
+              </div>
               {passwordError && <p className='text-red-400 text-[0.85rem] sm:text-[0.95rem] mt-1'>Password must required</p>}
             </div>
 
