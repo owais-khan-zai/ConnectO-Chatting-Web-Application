@@ -72,8 +72,6 @@ const ChatsComponent = () => {
     <div className=" pb-[5.5rem] mt-[4.3rem] sm:mt-[5.6rem] sm:pb-[110px]">
 
 
-      
-
       <div className="h-full overflow-y-scroll  chatsContainer">
         <div className="w-[95%] md:w-[98%] relative p-[0.6rem] sm:py-[10px] px-3  border-1  border-gray-300 rounded-3xl flex justify-between mx-auto">
           <input
@@ -88,7 +86,7 @@ const ChatsComponent = () => {
             return (
               <div
                 key={people.id}
-                className="flex  px-4  py-[0.6rem] sm:py-[15px] items-center justify-between cursor-pointer"
+                className="flex  px-4  py-[0.6rem] sm:py-[10px] items-center justify-between cursor-pointer"
               >
                 <div className="flex items-center gap-2">
                   <div className=" w-[3.2rem] sm:w-[58px] bg-blue-900 rounded-full overflow-hidden">

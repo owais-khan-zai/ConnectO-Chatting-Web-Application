@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { userServices } from "./userService";
+import { loggedInUser } from "../../api/userApi/userApiUrl";
 
 
 
@@ -29,44 +30,55 @@ export const loggedInUserThunk = createAsyncThunk( 'get/logged-in-user', async (
 
 
 const initialState = {
-    response: null,
-    loading: false,
-    error: false
+    AllUsersApiResponse: null,
+    AllUsersApiLoading: false,
+    AllUsersApiError: false,
+    
+    loggedInUserApiResponse: null,
+    loggedInUserApiLoading: false,
+    loggedInUserApiError: false,
 }
 
 const userSlice = createSlice({
     name: "user",
     initialState,
     reducers: {
-        resetUserState: (state) => {
-            state.response = null;
-            state.error = null;
-            state.loading = false;
+         resetUserState: (state) => {
+            state.AllUsersApiResponse = null;
+            state.AllUsersApiError = null;
+            state.AllUsersApiLoading = false;
+
+            state.loggedInUserApiResponse = null;
+            state.loggedInUserApiError = null;
+            state.loggedInUserApiLoading = false;
         }
     },
     extraReducers: (builder) => {
-        const thunks = [
-            getUserThunk,
-            loggedInUserThunk
-        ]
-
-        thunks.forEach((thunk)=>{
-            builder.addCase(thunk.pending, (state)=>{
-            state.loading = true
-            state.error = false
-            state.response = null
+         builder
+            .addCase(getUserThunk.pending, (state)=>{
+                state.AllUsersApiLoading = true;
             })
-            builder.addCase(thunk.fulfilled, ( state, action) => {
-                state.loading = false
-                state.response = action.payload
-                state.error = false
+            .addCase(getUserThunk.fulfilled, (state, action)=>{
+                state.AllUsersApiLoading = false;
+                state.AllUsersApiResponse = action.payload;
             })
-            builder.addCase(thunk.rejected, (state, action) => {
-                state.loading = false;
-                state.response = null;
-                state.error = action.payload || "Something went wrong!";
-            });
-        })
+            .addCase(getUserThunk.rejected, (state, action)=>{
+                state.AllUsersApiLoading = false;
+                state.AllUsersApiError = action.payload;
+            })
+  
+          builder
+              .addCase(loggedInUserThunk.pending, (state)=>{
+                  state.loggedInUserApiLoading = true;
+              })
+              .addCase(loggedInUserThunk.fulfilled, (state, action)=>{
+                  state.loggedInUserApiLoading = false;
+                  state.loggedInUserApiResponse = action.payload;
+              })
+              .addCase(loggedInUserThunk.rejected, (state, action)=>{
+                  state.loggedInUserApiLoading = false;
+                  state.loggedInUserApiError = action.payload;
+            })
     }
 })
 

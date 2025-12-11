@@ -63,8 +63,7 @@ export const loggedInUserData = async (req, res) =>{
         if(!loggedInUser){
             return responseHandler(res, 404, false, "Login your account first")
         }
-        const sendingData = userDataFilterFunction(loggedInUser);
-        return responseHandler(res, 200, true, "User data fetched successfully", sendingData)
+        return responseHandler(res, 200, true, "User data fetched successfully", loggedInUser)
     }
     catch(err){
         console.log("Error : ", err)
@@ -72,3 +71,27 @@ export const loggedInUserData = async (req, res) =>{
     }
 }
 
+export const userProfileUpdate = async (req, res) => {
+    try{
+        const { firstName, lastName } = req.body;
+        if(!firstName || !lastName){
+            return responseHandler(res, 400, false, "First name and last name are required")
+        }
+        const token = req.cookies.token;
+        if(!token){
+            return responseHandler(res, 400, false, "Login your account first")
+        }
+        const decoded = jwt.verify(token, process.env.JWT_SECRET)
+
+        if(!decoded){
+            return responseHandler(res, 400, false, "Invalid token! Login again")
+        }
+        const updatedUser = await userModel.findByIdAndUpdate(decoded.id, { firstName, lastName }, { new: true });
+        return responseHandler(res, 200, true, "User profile updated successfully", updatedUser)
+
+    }
+    catch(err){
+        console.log("Error : ", err)
+        return responseErrorHandler(res)
+    }
+}

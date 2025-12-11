@@ -17,9 +17,9 @@ const MemberComponent = () => {
 
     // yha destructure krky seperate name dia takay destructure krty hue same names ki waja sy error na aye 
     const {
-        response: userResponse,
-        loading: userLoading,
-        error: userError
+        AllUsersApiResponse: userResponse,
+        AllUsersApiLoading: userLoading,
+        AllUsersApiError: userError
     } = useSelector((state) => state.user)
 
     const {
@@ -83,7 +83,7 @@ const MemberComponent = () => {
 
         <div className={`fixed top-0 left-0 w-full h-full ${isPopUpOpen ? "block" : "hidden"} z-10 bg-black/30`}>
             <div className='absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] p-6 bg-[var(--bg-color)] text-[var(--text-color)] w-[85%] max-w-[360px] rounded-md'>
-                <h4 className='text-[1.3rem] sm:text-[1.6rem] font-semibold'>Confirmation</h4>
+                <h4 className='text-[1.3rem] sm:text-[1.6rem] font-semibold '>Confirmation</h4>
                 <p className='text-[var(--dark-shade)] text-[0.95rem] sm:text-[1.1rem]  mt-1'>Are you sure to withdraw this request?</p>
                 <div className='flex justify-between w-full  pt-5 sm:pt-6'>
                     <button onClick={()=>cancelPendingBtn()} className='border-2 rounded-full w-[49%] sm:text-[1.1rem] text-[var(--dark-shade)] py-2 font-semibold cursor-pointer'>Cancel</button>
